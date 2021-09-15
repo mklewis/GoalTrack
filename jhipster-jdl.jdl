@@ -1,0 +1,51 @@
+// an ignored comment
+/** not an ignored comment */
+
+
+/**
+ * Goal entity.
+ * @author The JHipster team.
+ */
+entity Goal {
+	title String,
+	description String,
+    targetDate Instant,
+    startDate Instant,
+	endDate Instant,
+    status Status
+}
+
+/**
+ * The Person entity.
+ */
+entity Person {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String,
+	lastName String,
+	email String,
+	phoneNumber String
+	
+}
+
+
+enum Status {
+	CREATED, STARTED, STOPPED, COMPLETED, CANCELED
+}
+
+relationship ManyToMany {
+	Person{goal} to Goal{person}
+}
+
+// Set pagination options
+paginate Goal, Person with infinite-scroll
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

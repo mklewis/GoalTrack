@@ -1,0 +1,12 @@
+{
+  "goalTrackerApp": {
+    "Status": {
+      "null": "",
+      "CREATED": "CREATED",
+      "STARTED": "STARTED",
+      "STOPPED": "STOPPED",
+      "COMPLETED": "COMPLETED",
+      "CANCELED": "CANCELED"
+    }
+  }
+}
