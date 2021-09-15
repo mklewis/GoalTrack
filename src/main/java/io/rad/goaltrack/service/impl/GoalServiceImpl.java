@@ -44,18 +44,6 @@ public class GoalServiceImpl implements GoalService {
                     if (goal.getDescription() != null) {
                         existingGoal.setDescription(goal.getDescription());
                     }
-                    if (goal.getTargetDate() != null) {
-                        existingGoal.setTargetDate(goal.getTargetDate());
-                    }
-                    if (goal.getStartDate() != null) {
-                        existingGoal.setStartDate(goal.getStartDate());
-                    }
-                    if (goal.getEndDate() != null) {
-                        existingGoal.setEndDate(goal.getEndDate());
-                    }
-                    if (goal.getStatus() != null) {
-                        existingGoal.setStatus(goal.getStatus());
-                    }
 
                     return existingGoal;
                 }

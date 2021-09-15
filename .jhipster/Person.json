@@ -19,15 +19,7 @@
       "fieldType": "String"
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "goal",
-      "otherEntityRelationshipName": "person",
-      "relationshipName": "goal",
-      "ownerSide": true
-    }
-  ],
+  "relationships": [],
   "javadoc": "The Person entity.",
   "entityTableName": "person",
   "dto": "no",

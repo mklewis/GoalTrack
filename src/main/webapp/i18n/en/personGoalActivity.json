@@ -1,0 +1,29 @@
+{
+  "goalTrackerApp": {
+    "personGoalActivity": {
+      "home": {
+        "title": "Person Goal Activities",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Person Goal Activity",
+        "createOrEditLabel": "Create or edit a Person Goal Activity",
+        "notFound": "No Person Goal Activities found"
+      },
+      "created": "A new Person Goal Activity is created with identifier {{ param }}",
+      "updated": "A Person Goal Activity is updated with identifier {{ param }}",
+      "deleted": "A Person Goal Activity is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Person Goal Activity {{ id }}?"
+      },
+      "detail": {
+        "title": "Person Goal Activity"
+      },
+      "id": "ID",
+      "targetDate": "Target Date",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "status": "Status",
+      "goal": "Goal",
+      "person": "Person"
+    }
+  }
+}

@@ -9,6 +9,7 @@
         "main": "Entities",
         "goal": "Goal",
         "person": "Person",
+        "personGoalActivity": "Person Goal Activity",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {
@@ -139,5 +140,5 @@
       "not.image": "File was expected to be an image but was found to be \"{{ fileType }}\""
     }
   },
-  "footer": "This is your footer"
+  "footer": "Brought to you by the Get Clean Project."
 }

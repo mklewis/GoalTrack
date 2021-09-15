@@ -18,30 +18,6 @@
           <dd>
             <span>{{ goal.description }}</span>
           </dd>
-          <dt>
-            <span v-text="$t('goalTrackerApp.goal.targetDate')">Target Date</span>
-          </dt>
-          <dd>
-            <span v-if="goal.targetDate">{{ $d(Date.parse(goal.targetDate), 'long') }}</span>
-          </dd>
-          <dt>
-            <span v-text="$t('goalTrackerApp.goal.startDate')">Start Date</span>
-          </dt>
-          <dd>
-            <span v-if="goal.startDate">{{ $d(Date.parse(goal.startDate), 'long') }}</span>
-          </dd>
-          <dt>
-            <span v-text="$t('goalTrackerApp.goal.endDate')">End Date</span>
-          </dt>
-          <dd>
-            <span v-if="goal.endDate">{{ $d(Date.parse(goal.endDate), 'long') }}</span>
-          </dd>
-          <dt>
-            <span v-text="$t('goalTrackerApp.goal.status')">Status</span>
-          </dt>
-          <dd>
-            <span v-text="$t('goalTrackerApp.Status.' + goal.status)">{{ goal.status }}</span>
-          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.back')"> Back</span>

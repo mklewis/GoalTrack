@@ -8,11 +8,14 @@
  */
 entity Goal {
 	title String,
-	description String,
-    targetDate Instant,
-    startDate Instant,
+	description String
+}
+
+entity PersonGoalActivity {
+	targetDate Instant,
+  startDate Instant,
 	endDate Instant,
-    status Status
+	status Status
 }
 
 /**
@@ -33,9 +36,9 @@ entity Person {
 enum Status {
 	CREATED, STARTED, STOPPED, COMPLETED, CANCELED
 }
-
-relationship ManyToMany {
-	Person{goal} to Goal{person}
+relationship OneToOne{
+	PersonGoalActivity{goal(title)} to Goal,
+    PersonGoalActivity{person(email)} to Person
 }
 
 // Set pagination options
@@ -46,6 +49,3 @@ paginate Goal, Person with infinite-scroll
 
 // Set service options to all except few
 service all with serviceImpl
-
-// Set an angular suffix
-// angularSuffix * with mySuffix

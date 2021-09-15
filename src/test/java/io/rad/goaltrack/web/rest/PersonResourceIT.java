@@ -2,26 +2,18 @@ package io.rad.goaltrack.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import io.rad.goaltrack.IntegrationTest;
 import io.rad.goaltrack.domain.Person;
 import io.rad.goaltrack.repository.PersonRepository;
-import io.rad.goaltrack.service.PersonService;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
@@ -30,7 +22,6 @@ import org.springframework.test.web.servlet.MockMvc;
  * Integration tests for the {@link PersonResource} REST controller.
  */
 @IntegrationTest
-@ExtendWith(MockitoExtension.class)
 @AutoConfigureMockMvc
 @WithMockUser
 class PersonResourceIT {
@@ -52,12 +43,6 @@ class PersonResourceIT {
 
     @Autowired
     private PersonRepository personRepository;
-
-    @Mock
-    private PersonRepository personRepositoryMock;
-
-    @Mock
-    private PersonService personServiceMock;
 
     @Autowired
     private MockMvc restPersonMockMvc;
@@ -150,24 +135,6 @@ class PersonResourceIT {
             .andExpect(jsonPath("$.[*].lastName").value(hasItem(DEFAULT_LAST_NAME)))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL)))
             .andExpect(jsonPath("$.[*].phoneNumber").value(hasItem(DEFAULT_PHONE_NUMBER)));
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllPeopleWithEagerRelationshipsIsEnabled() throws Exception {
-        when(personServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restPersonMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(personServiceMock, times(1)).findAllWithEagerRelationships(any());
-    }
-
-    @SuppressWarnings({ "unchecked" })
-    void getAllPeopleWithEagerRelationshipsIsNotEnabled() throws Exception {
-        when(personServiceMock.findAllWithEagerRelationships(any())).thenReturn(new PageImpl(new ArrayList<>()));
-
-        restPersonMockMvc.perform(get(ENTITY_API_URL + "?eagerload=true")).andExpect(status().isOk());
-
-        verify(personServiceMock, times(1)).findAllWithEagerRelationships(any());
     }
 
     @Test

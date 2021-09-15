@@ -35,22 +35,6 @@
               <span v-text="$t('goalTrackerApp.goal.description')">Description</span>
               <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'description'"></jhi-sort-indicator>
             </th>
-            <th scope="row" v-on:click="changeOrder('targetDate')">
-              <span v-text="$t('goalTrackerApp.goal.targetDate')">Target Date</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'targetDate'"></jhi-sort-indicator>
-            </th>
-            <th scope="row" v-on:click="changeOrder('startDate')">
-              <span v-text="$t('goalTrackerApp.goal.startDate')">Start Date</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'startDate'"></jhi-sort-indicator>
-            </th>
-            <th scope="row" v-on:click="changeOrder('endDate')">
-              <span v-text="$t('goalTrackerApp.goal.endDate')">End Date</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'endDate'"></jhi-sort-indicator>
-            </th>
-            <th scope="row" v-on:click="changeOrder('status')">
-              <span v-text="$t('goalTrackerApp.goal.status')">Status</span>
-              <jhi-sort-indicator :current-order="propOrder" :reverse="reverse" :field-name="'status'"></jhi-sort-indicator>
-            </th>
             <th scope="row"></th>
           </tr>
         </thead>
@@ -61,10 +45,6 @@
             </td>
             <td>{{ goal.title }}</td>
             <td>{{ goal.description }}</td>
-            <td>{{ goal.targetDate ? $d(Date.parse(goal.targetDate), 'short') : '' }}</td>
-            <td>{{ goal.startDate ? $d(Date.parse(goal.startDate), 'short') : '' }}</td>
-            <td>{{ goal.endDate ? $d(Date.parse(goal.endDate), 'short') : '' }}</td>
-            <td v-text="$t('goalTrackerApp.Status.' + goal.status)">{{ goal.status }}</td>
             <td class="text-right">
               <div class="btn-group">
                 <router-link :to="{ name: 'GoalView', params: { goalId: goal.id } }" custom v-slot="{ navigate }">

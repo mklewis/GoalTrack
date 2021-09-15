@@ -63,14 +63,10 @@ public class PersonServiceImpl implements PersonService {
         return personRepository.findAll(pageable);
     }
 
-    public Page<Person> findAllWithEagerRelationships(Pageable pageable) {
-        return personRepository.findAllWithEagerRelationships(pageable);
-    }
-
     @Override
     public Optional<Person> findOne(String id) {
         log.debug("Request to get Person : {}", id);
-        return personRepository.findOneWithEagerRelationships(id);
+        return personRepository.findById(id);
     }
 
     @Override

@@ -14,6 +14,12 @@ const Person = () => import('@/entities/person/person.vue');
 const PersonUpdate = () => import('@/entities/person/person-update.vue');
 // prettier-ignore
 const PersonDetails = () => import('@/entities/person/person-details.vue');
+// prettier-ignore
+const PersonGoalActivity = () => import('@/entities/person-goal-activity/person-goal-activity.vue');
+// prettier-ignore
+const PersonGoalActivityUpdate = () => import('@/entities/person-goal-activity/person-goal-activity-update.vue');
+// prettier-ignore
+const PersonGoalActivityDetails = () => import('@/entities/person-goal-activity/person-goal-activity-details.vue');
 // jhipster-needle-add-entity-to-router-import - JHipster will import entities to the router here
 
 export default [
@@ -63,6 +69,30 @@ export default [
     path: '/person/:personId/view',
     name: 'PersonView',
     component: PersonDetails,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/person-goal-activity',
+    name: 'PersonGoalActivity',
+    component: PersonGoalActivity,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/person-goal-activity/new',
+    name: 'PersonGoalActivityCreate',
+    component: PersonGoalActivityUpdate,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/person-goal-activity/:personGoalActivityId/edit',
+    name: 'PersonGoalActivityEdit',
+    component: PersonGoalActivityUpdate,
+    meta: { authorities: [Authority.USER] },
+  },
+  {
+    path: '/person-goal-activity/:personGoalActivityId/view',
+    name: 'PersonGoalActivityView',
+    component: PersonGoalActivityDetails,
     meta: { authorities: [Authority.USER] },
   },
   // jhipster-needle-add-entity-to-router - JHipster will add entities to the router here

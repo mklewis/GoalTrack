@@ -8,8 +8,6 @@ import PersonUpdateComponent from '@/entities/person/person-update.vue';
 import PersonClass from '@/entities/person/person-update.component';
 import PersonService from '@/entities/person/person.service';
 
-import GoalService from '@/entities/goal/goal.service';
-
 const localVue = createLocalVue();
 
 config.initVueApp(localVue);
@@ -39,8 +37,6 @@ describe('Component Tests', () => {
         router,
         provide: {
           personService: () => personServiceStub,
-
-          goalService: () => new GoalService(),
         },
       });
       comp = wrapper.vm;

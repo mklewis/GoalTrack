@@ -22,7 +22,6 @@
       "lastName": "Last Name",
       "email": "Email",
       "phoneNumber": "Phone Number",
-      "goal": "Goal",
       "help": {
         "firstName": "The firstname attribute."
       }

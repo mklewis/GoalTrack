@@ -1,11 +1,5 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
-import dayjs from 'dayjs';
-import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
-
-import PersonService from '@/entities/person/person.service';
-import { IPerson } from '@/shared/model/person.model';
-
 import { IGoal, Goal } from '@/shared/model/goal.model';
 import GoalService from './goal.service';
 
@@ -13,10 +7,6 @@ const validations: any = {
   goal: {
     title: {},
     description: {},
-    targetDate: {},
-    startDate: {},
-    endDate: {},
-    status: {},
   },
 };
 
@@ -26,10 +16,6 @@ const validations: any = {
 export default class GoalUpdate extends Vue {
   @Inject('goalService') private goalService: () => GoalService;
   public goal: IGoal = new Goal();
-
-  @Inject('personService') private personService: () => PersonService;
-
-  public people: IPerson[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -38,7 +24,6 @@ export default class GoalUpdate extends Vue {
       if (to.params.goalId) {
         vm.retrieveGoal(to.params.goalId);
       }
-      vm.initRelationships();
     });
   }
 
@@ -87,36 +72,10 @@ export default class GoalUpdate extends Vue {
     }
   }
 
-  public convertDateTimeFromServer(date: Date): string {
-    if (date && dayjs(date).isValid()) {
-      return dayjs(date).format(DATE_TIME_LONG_FORMAT);
-    }
-    return null;
-  }
-
-  public updateInstantField(field, event) {
-    if (event.target.value) {
-      this.goal[field] = dayjs(event.target.value, DATE_TIME_LONG_FORMAT);
-    } else {
-      this.goal[field] = null;
-    }
-  }
-
-  public updateZonedDateTimeField(field, event) {
-    if (event.target.value) {
-      this.goal[field] = dayjs(event.target.value, DATE_TIME_LONG_FORMAT);
-    } else {
-      this.goal[field] = null;
-    }
-  }
-
   public retrieveGoal(goalId): void {
     this.goalService()
       .find(goalId)
       .then(res => {
-        res.targetDate = new Date(res.targetDate);
-        res.startDate = new Date(res.startDate);
-        res.endDate = new Date(res.endDate);
         this.goal = res;
       });
   }
@@ -125,11 +84,5 @@ export default class GoalUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {
-    this.personService()
-      .retrieve()
-      .then(res => {
-        this.people = res.data;
-      });
-  }
+  public initRelationships(): void {}
 }

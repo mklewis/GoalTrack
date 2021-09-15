@@ -62,22 +62,6 @@
               v-model="$v.person.phoneNumber.$model"
             />
           </div>
-          <div class="form-group">
-            <label v-text="$t('goalTrackerApp.person.goal')" for="person-goal">Goal</label>
-            <select
-              class="form-control"
-              id="person-goal"
-              data-cy="goal"
-              multiple
-              name="goal"
-              v-if="person.goals !== undefined"
-              v-model="person.goals"
-            >
-              <option v-bind:value="getSelected(person.goals, goalOption)" v-for="goalOption in goals" :key="goalOption.id">
-                {{ goalOption.id }}
-              </option>
-            </select>
-          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

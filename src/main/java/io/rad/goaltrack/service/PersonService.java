@@ -34,14 +34,6 @@ public interface PersonService {
     Page<Person> findAll(Pageable pageable);
 
     /**
-     * Get all the people with eager load of many-to-many relationships.
-     *
-     * @param pageable the pagination information.
-     * @return the list of entities.
-     */
-    Page<Person> findAllWithEagerRelationships(Pageable pageable);
-
-    /**
      * Get the "id" person.
      *
      * @param id the id of the entity.

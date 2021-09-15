@@ -30,6 +30,7 @@ import UserOAuth2Service from '@/entities/user/user.oauth2.service';
 
 import GoalService from '@/entities/goal/goal.service';
 import PersonService from '@/entities/person/person.service';
+import PersonGoalActivityService from '@/entities/person-goal-activity/person-goal-activity.service';
 // jhipster-needle-add-entity-service-to-main-import - JHipster will import entities services here
 
 /* tslint:enable */
@@ -92,6 +93,7 @@ new Vue({
     translationService: () => translationService,
     goalService: () => new GoalService(),
     personService: () => new PersonService(),
+    personGoalActivityService: () => new PersonGoalActivityService(),
     // jhipster-needle-add-entity-service-to-main - JHipster will import entities services here
     accountService: () => accountService,
   },

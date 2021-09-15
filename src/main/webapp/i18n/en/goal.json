@@ -19,12 +19,7 @@
       },
       "id": "ID",
       "title": "Title",
-      "description": "Description",
-      "targetDate": "Target Date",
-      "startDate": "Start Date",
-      "endDate": "End Date",
-      "status": "Status",
-      "person": "Person"
+      "description": "Description"
     }
   }
 }

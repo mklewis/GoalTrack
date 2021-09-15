@@ -38,68 +38,6 @@
               v-model="$v.goal.description.$model"
             />
           </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('goalTrackerApp.goal.targetDate')" for="goal-targetDate">Target Date</label>
-            <div class="d-flex">
-              <input
-                id="goal-targetDate"
-                data-cy="targetDate"
-                type="datetime-local"
-                class="form-control"
-                name="targetDate"
-                :class="{ valid: !$v.goal.targetDate.$invalid, invalid: $v.goal.targetDate.$invalid }"
-                :value="convertDateTimeFromServer($v.goal.targetDate.$model)"
-                @change="updateInstantField('targetDate', $event)"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('goalTrackerApp.goal.startDate')" for="goal-startDate">Start Date</label>
-            <div class="d-flex">
-              <input
-                id="goal-startDate"
-                data-cy="startDate"
-                type="datetime-local"
-                class="form-control"
-                name="startDate"
-                :class="{ valid: !$v.goal.startDate.$invalid, invalid: $v.goal.startDate.$invalid }"
-                :value="convertDateTimeFromServer($v.goal.startDate.$model)"
-                @change="updateInstantField('startDate', $event)"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('goalTrackerApp.goal.endDate')" for="goal-endDate">End Date</label>
-            <div class="d-flex">
-              <input
-                id="goal-endDate"
-                data-cy="endDate"
-                type="datetime-local"
-                class="form-control"
-                name="endDate"
-                :class="{ valid: !$v.goal.endDate.$invalid, invalid: $v.goal.endDate.$invalid }"
-                :value="convertDateTimeFromServer($v.goal.endDate.$model)"
-                @change="updateInstantField('endDate', $event)"
-              />
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-control-label" v-text="$t('goalTrackerApp.goal.status')" for="goal-status">Status</label>
-            <select
-              class="form-control"
-              name="status"
-              :class="{ valid: !$v.goal.status.$invalid, invalid: $v.goal.status.$invalid }"
-              v-model="$v.goal.status.$model"
-              id="goal-status"
-              data-cy="status"
-            >
-              <option value="CREATED" v-bind:label="$t('goalTrackerApp.Status.CREATED')">CREATED</option>
-              <option value="STARTED" v-bind:label="$t('goalTrackerApp.Status.STARTED')">STARTED</option>
-              <option value="STOPPED" v-bind:label="$t('goalTrackerApp.Status.STOPPED')">STOPPED</option>
-              <option value="COMPLETED" v-bind:label="$t('goalTrackerApp.Status.COMPLETED')">COMPLETED</option>
-              <option value="CANCELED" v-bind:label="$t('goalTrackerApp.Status.CANCELED')">CANCELED</option>
-            </select>
-          </div>
         </div>
         <div>
           <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" v-on:click="previousState()">

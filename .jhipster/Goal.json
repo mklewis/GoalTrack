@@ -8,34 +8,9 @@
     {
       "fieldName": "description",
       "fieldType": "String"
-    },
-    {
-      "fieldName": "targetDate",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "startDate",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "endDate",
-      "fieldType": "Instant"
-    },
-    {
-      "fieldName": "status",
-      "fieldType": "Status",
-      "fieldValues": "CREATED,STARTED,STOPPED,COMPLETED,CANCELED"
     }
   ],
-  "relationships": [
-    {
-      "relationshipType": "many-to-many",
-      "otherEntityName": "person",
-      "otherEntityRelationshipName": "goal",
-      "relationshipName": "person",
-      "ownerSide": false
-    }
-  ],
+  "relationships": [],
   "javadoc": "Goal entity.\\n@author The JHipster team.",
   "entityTableName": "goal",
   "dto": "no",

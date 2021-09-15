@@ -30,15 +30,6 @@
           <dd>
             <span>{{ person.phoneNumber }}</span>
           </dd>
-          <dt>
-            <span v-text="$t('goalTrackerApp.person.goal')">Goal</span>
-          </dt>
-          <dd>
-            <span v-for="(goal, i) in person.goals" :key="goal.id"
-              >{{ i > 0 ? ', ' : '' }}
-              <router-link :to="{ name: 'GoalView', params: { goalId: goal.id } }">{{ goal.id }}</router-link>
-            </span>
-          </dd>
         </dl>
         <button type="submit" v-on:click.prevent="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
           <font-awesome-icon icon="arrow-left"></font-awesome-icon>&nbsp;<span v-text="$t('entity.action.back')"> Back</span>

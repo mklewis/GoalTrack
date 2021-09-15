@@ -3,15 +3,10 @@ import { shallowMount, createLocalVue, Wrapper } from '@vue/test-utils';
 import sinon, { SinonStubbedInstance } from 'sinon';
 import Router from 'vue-router';
 
-import dayjs from 'dayjs';
-import { DATE_TIME_LONG_FORMAT } from '@/shared/date/filters';
-
 import * as config from '@/shared/config/config';
 import GoalUpdateComponent from '@/entities/goal/goal-update.vue';
 import GoalClass from '@/entities/goal/goal-update.component';
 import GoalService from '@/entities/goal/goal.service';
-
-import PersonService from '@/entities/person/person.service';
 
 const localVue = createLocalVue();
 
@@ -42,28 +37,9 @@ describe('Component Tests', () => {
         router,
         provide: {
           goalService: () => goalServiceStub,
-
-          personService: () => new PersonService(),
         },
       });
       comp = wrapper.vm;
-    });
-
-    describe('load', () => {
-      it('Should convert date from string', () => {
-        // GIVEN
-        const date = new Date('2019-10-15T11:42:02Z');
-
-        // WHEN
-        const convertedDate = comp.convertDateTimeFromServer(date);
-
-        // THEN
-        expect(convertedDate).toEqual(dayjs(date).format(DATE_TIME_LONG_FORMAT));
-      });
-
-      it('Should not convert date if date is not present', () => {
-        expect(comp.convertDateTimeFromServer(null)).toBeNull();
-      });
     });
 
     describe('save', () => {

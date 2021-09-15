@@ -1,0 +1,50 @@
+{
+  "name": "PersonGoalActivity",
+  "fields": [
+    {
+      "fieldName": "targetDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "startDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "endDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Status",
+      "fieldValues": "CREATED,STARTED,STOPPED,COMPLETED,CANCELED"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "goal",
+      "otherEntityRelationshipName": "personGoalActivity",
+      "relationshipName": "goal",
+      "otherEntityField": "title",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "person",
+      "otherEntityRelationshipName": "personGoalActivity",
+      "relationshipName": "person",
+      "otherEntityField": "email",
+      "ownerSide": true
+    }
+  ],
+  "entityTableName": "person_goal_activity",
+  "dto": "no",
+  "pagination": "no",
+  "service": "serviceImpl",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "applications": "*",
+  "changelogDate": "20210915214512"
+}

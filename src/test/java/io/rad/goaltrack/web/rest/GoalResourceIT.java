@@ -7,10 +7,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import io.rad.goaltrack.IntegrationTest;
 import io.rad.goaltrack.domain.Goal;
-import io.rad.goaltrack.domain.enumeration.Status;
 import io.rad.goaltrack.repository.GoalRepository;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,18 +32,6 @@ class GoalResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_TARGET_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_TARGET_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final Instant DEFAULT_START_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_START_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final Instant DEFAULT_END_DATE = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_END_DATE = Instant.now().truncatedTo(ChronoUnit.MILLIS);
-
-    private static final Status DEFAULT_STATUS = Status.CREATED;
-    private static final Status UPDATED_STATUS = Status.STARTED;
-
     private static final String ENTITY_API_URL = "/api/goals";
     private static final String ENTITY_API_URL_ID = ENTITY_API_URL + "/{id}";
 
@@ -65,13 +50,7 @@ class GoalResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Goal createEntity() {
-        Goal goal = new Goal()
-            .title(DEFAULT_TITLE)
-            .description(DEFAULT_DESCRIPTION)
-            .targetDate(DEFAULT_TARGET_DATE)
-            .startDate(DEFAULT_START_DATE)
-            .endDate(DEFAULT_END_DATE)
-            .status(DEFAULT_STATUS);
+        Goal goal = new Goal().title(DEFAULT_TITLE).description(DEFAULT_DESCRIPTION);
         return goal;
     }
 
@@ -82,13 +61,7 @@ class GoalResourceIT {
      * if they test an entity which requires the current entity.
      */
     public static Goal createUpdatedEntity() {
-        Goal goal = new Goal()
-            .title(UPDATED_TITLE)
-            .description(UPDATED_DESCRIPTION)
-            .targetDate(UPDATED_TARGET_DATE)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .status(UPDATED_STATUS);
+        Goal goal = new Goal().title(UPDATED_TITLE).description(UPDATED_DESCRIPTION);
         return goal;
     }
 
@@ -112,10 +85,6 @@ class GoalResourceIT {
         Goal testGoal = goalList.get(goalList.size() - 1);
         assertThat(testGoal.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testGoal.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testGoal.getTargetDate()).isEqualTo(DEFAULT_TARGET_DATE);
-        assertThat(testGoal.getStartDate()).isEqualTo(DEFAULT_START_DATE);
-        assertThat(testGoal.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testGoal.getStatus()).isEqualTo(DEFAULT_STATUS);
     }
 
     @Test
@@ -147,11 +116,7 @@ class GoalResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(goal.getId())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
-            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].targetDate").value(hasItem(DEFAULT_TARGET_DATE.toString())))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
-            .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS.toString())));
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)));
     }
 
     @Test
@@ -166,11 +131,7 @@ class GoalResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(goal.getId()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
-            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.targetDate").value(DEFAULT_TARGET_DATE.toString()))
-            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
-            .andExpect(jsonPath("$.status").value(DEFAULT_STATUS.toString()));
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION));
     }
 
     @Test
@@ -188,13 +149,7 @@ class GoalResourceIT {
 
         // Update the goal
         Goal updatedGoal = goalRepository.findById(goal.getId()).get();
-        updatedGoal
-            .title(UPDATED_TITLE)
-            .description(UPDATED_DESCRIPTION)
-            .targetDate(UPDATED_TARGET_DATE)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .status(UPDATED_STATUS);
+        updatedGoal.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION);
 
         restGoalMockMvc
             .perform(
@@ -210,10 +165,6 @@ class GoalResourceIT {
         Goal testGoal = goalList.get(goalList.size() - 1);
         assertThat(testGoal.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testGoal.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testGoal.getTargetDate()).isEqualTo(UPDATED_TARGET_DATE);
-        assertThat(testGoal.getStartDate()).isEqualTo(UPDATED_START_DATE);
-        assertThat(testGoal.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testGoal.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -280,8 +231,6 @@ class GoalResourceIT {
         Goal partialUpdatedGoal = new Goal();
         partialUpdatedGoal.setId(goal.getId());
 
-        partialUpdatedGoal.startDate(UPDATED_START_DATE).status(UPDATED_STATUS);
-
         restGoalMockMvc
             .perform(
                 patch(ENTITY_API_URL_ID, partialUpdatedGoal.getId())
@@ -296,10 +245,6 @@ class GoalResourceIT {
         Goal testGoal = goalList.get(goalList.size() - 1);
         assertThat(testGoal.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testGoal.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testGoal.getTargetDate()).isEqualTo(DEFAULT_TARGET_DATE);
-        assertThat(testGoal.getStartDate()).isEqualTo(UPDATED_START_DATE);
-        assertThat(testGoal.getEndDate()).isEqualTo(DEFAULT_END_DATE);
-        assertThat(testGoal.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test
@@ -313,13 +258,7 @@ class GoalResourceIT {
         Goal partialUpdatedGoal = new Goal();
         partialUpdatedGoal.setId(goal.getId());
 
-        partialUpdatedGoal
-            .title(UPDATED_TITLE)
-            .description(UPDATED_DESCRIPTION)
-            .targetDate(UPDATED_TARGET_DATE)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
-            .status(UPDATED_STATUS);
+        partialUpdatedGoal.title(UPDATED_TITLE).description(UPDATED_DESCRIPTION);
 
         restGoalMockMvc
             .perform(
@@ -335,10 +274,6 @@ class GoalResourceIT {
         Goal testGoal = goalList.get(goalList.size() - 1);
         assertThat(testGoal.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testGoal.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testGoal.getTargetDate()).isEqualTo(UPDATED_TARGET_DATE);
-        assertThat(testGoal.getStartDate()).isEqualTo(UPDATED_START_DATE);
-        assertThat(testGoal.getEndDate()).isEqualTo(UPDATED_END_DATE);
-        assertThat(testGoal.getStatus()).isEqualTo(UPDATED_STATUS);
     }
 
     @Test

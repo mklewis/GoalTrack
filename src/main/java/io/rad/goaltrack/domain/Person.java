@@ -1,13 +1,9 @@
 package io.rad.goaltrack.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -38,11 +34,6 @@ public class Person implements Serializable {
 
     @Field("phone_number")
     private String phoneNumber;
-
-    @DBRef
-    @Field("goals")
-    @JsonIgnoreProperties(value = { "people" }, allowSetters = true)
-    private Set<Goal> goals = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public String getId() {
@@ -108,31 +99,6 @@ public class Person implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
-    }
-
-    public Set<Goal> getGoals() {
-        return this.goals;
-    }
-
-    public Person goals(Set<Goal> goals) {
-        this.setGoals(goals);
-        return this;
-    }
-
-    public Person addGoal(Goal goal) {
-        this.goals.add(goal);
-        goal.getPeople().add(this);
-        return this;
-    }
-
-    public Person removeGoal(Goal goal) {
-        this.goals.remove(goal);
-        goal.getPeople().remove(this);
-        return this;
-    }
-
-    public void setGoals(Set<Goal> goals) {
-        this.goals = goals;
     }
 
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here

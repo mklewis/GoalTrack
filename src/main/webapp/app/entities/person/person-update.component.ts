@@ -1,8 +1,5 @@
 import { Component, Vue, Inject } from 'vue-property-decorator';
 
-import GoalService from '@/entities/goal/goal.service';
-import { IGoal } from '@/shared/model/goal.model';
-
 import { IPerson, Person } from '@/shared/model/person.model';
 import PersonService from './person.service';
 
@@ -21,10 +18,6 @@ const validations: any = {
 export default class PersonUpdate extends Vue {
   @Inject('personService') private personService: () => PersonService;
   public person: IPerson = new Person();
-
-  @Inject('goalService') private goalService: () => GoalService;
-
-  public goals: IGoal[] = [];
   public isSaving = false;
   public currentLanguage = '';
 
@@ -33,7 +26,6 @@ export default class PersonUpdate extends Vue {
       if (to.params.personId) {
         vm.retrievePerson(to.params.personId);
       }
-      vm.initRelationships();
     });
   }
 
@@ -45,7 +37,6 @@ export default class PersonUpdate extends Vue {
         this.currentLanguage = this.$store.getters.currentLanguage;
       }
     );
-    this.person.goals = [];
   }
 
   public save(): void {
@@ -95,22 +86,5 @@ export default class PersonUpdate extends Vue {
     this.$router.go(-1);
   }
 
-  public initRelationships(): void {
-    this.goalService()
-      .retrieve()
-      .then(res => {
-        this.goals = res.data;
-      });
-  }
-
-  public getSelected(selectedVals, option): any {
-    if (selectedVals) {
-      for (let i = 0; i < selectedVals.length; i++) {
-        if (option.id === selectedVals[i].id) {
-          return selectedVals[i];
-        }
-      }
-    }
-    return option;
-  }
+  public initRelationships(): void {}
 }

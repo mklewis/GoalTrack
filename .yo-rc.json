@@ -43,7 +43,7 @@
     "clientPackageManager": "npm",
     "clientThemeVariant": "",
     "languages": ["en"],
-    "entities": ["Goal", "Person"],
-    "lastLiquibaseTimestamp": 1631716786000
+    "entities": ["Goal", "Person", "PersonGoalActivity"],
+    "lastLiquibaseTimestamp": 1631742312000
   }
 }

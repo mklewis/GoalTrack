@@ -1,12 +1,9 @@
 /* tslint:disable max-line-length */
 import axios from 'axios';
 import sinon from 'sinon';
-import dayjs from 'dayjs';
 
-import { DATE_TIME_FORMAT } from '@/shared/date/filters';
 import GoalService from '@/entities/goal/goal.service';
 import { Goal } from '@/shared/model/goal.model';
-import { Status } from '@/shared/model/enumerations/status.model';
 
 const error = {
   response: {
@@ -29,24 +26,15 @@ describe('Service Tests', () => {
   describe('Goal Service', () => {
     let service: GoalService;
     let elemDefault;
-    let currentDate: Date;
 
     beforeEach(() => {
       service = new GoalService();
-      currentDate = new Date();
-      elemDefault = new Goal('ABC', 'AAAAAAA', 'AAAAAAA', currentDate, currentDate, currentDate, Status.CREATED);
+      elemDefault = new Goal('ABC', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', async () => {
-        const returnedFromService = Object.assign(
-          {
-            targetDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            startDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            endDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-          },
-          elemDefault
-        );
+        const returnedFromService = Object.assign({}, elemDefault);
         axiosStub.get.resolves({ data: returnedFromService });
 
         return service.find('ABC').then(res => {
@@ -68,20 +56,10 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 'ABC',
-            targetDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            startDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            endDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
           },
           elemDefault
         );
-        const expected = Object.assign(
-          {
-            targetDate: currentDate,
-            startDate: currentDate,
-            endDate: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
 
         axiosStub.post.resolves({ data: returnedFromService });
         return service.create({}).then(res => {
@@ -105,22 +83,11 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             description: 'BBBBBB',
-            targetDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            startDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            endDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            status: 'BBBBBB',
           },
           elemDefault
         );
 
-        const expected = Object.assign(
-          {
-            targetDate: currentDate,
-            startDate: currentDate,
-            endDate: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
         axiosStub.put.resolves({ data: returnedFromService });
 
         return service.update(expected).then(res => {
@@ -140,23 +107,10 @@ describe('Service Tests', () => {
       });
 
       it('should partial update a Goal', async () => {
-        const patchObject = Object.assign(
-          {
-            endDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            status: 'BBBBBB',
-          },
-          new Goal()
-        );
+        const patchObject = Object.assign({}, new Goal());
         const returnedFromService = Object.assign(patchObject, elemDefault);
 
-        const expected = Object.assign(
-          {
-            targetDate: currentDate,
-            startDate: currentDate,
-            endDate: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
         axiosStub.patch.resolves({ data: returnedFromService });
 
         return service.partialUpdate(patchObject).then(res => {
@@ -180,21 +134,10 @@ describe('Service Tests', () => {
           {
             title: 'BBBBBB',
             description: 'BBBBBB',
-            targetDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            startDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            endDate: dayjs(currentDate).format(DATE_TIME_FORMAT),
-            status: 'BBBBBB',
           },
           elemDefault
         );
-        const expected = Object.assign(
-          {
-            targetDate: currentDate,
-            startDate: currentDate,
-            endDate: currentDate,
-          },
-          returnedFromService
-        );
+        const expected = Object.assign({}, returnedFromService);
         axiosStub.get.resolves([returnedFromService]);
         return service.retrieve({ sort: {}, page: 0, size: 10 }).then(res => {
           expect(res).toContainEqual(expected);
